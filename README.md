@@ -3,7 +3,7 @@ iOS 柱状图，支持多个 Y  轴坐标
 
 ## 效果图
 
-![效果图](https://github.com/pljhonglu/LewPickerController/blob/master/images/default.png)
+![效果图](https://github.com/pljhonglu/LewBarChart/blob/master/images/default.png)
 
 ## 使用方法
 
