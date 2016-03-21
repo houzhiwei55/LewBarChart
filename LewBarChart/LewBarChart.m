@@ -108,14 +108,15 @@
     if (_data.xLabels) {
         NSUInteger xLabelCount = _data.xLabels.count;
         CGFloat xLabelWidth = (self.bounds.size.width - _chartMargin.left - _chartMargin.right + _data.groupSpace) / xLabelCount - _data.groupSpace;
-        CGFloat xLabelHeight = self.bounds.size.height-_chartMargin.bottom-XLabelMarginTop;
+        CGFloat xLabelHeight = _chartMargin.bottom-XLabelMarginTop;
         UIFont  *font = [UIFont systemFontOfSize:_data.xLabelFontSize];//设置
         [_data.xLabels enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             CGRect rect = CGRectMake(_chartMargin.left+idx*(xLabelWidth+_data.groupSpace), self.bounds.size.height-_chartMargin.bottom+XLabelMarginTop, xLabelWidth, xLabelHeight);
             NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
             style.lineBreakMode = NSLineBreakByWordWrapping;
             style.alignment = NSTextAlignmentCenter;
-            [obj drawInRect:rect withAttributes:@{NSFontAttributeName:font, NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName:_data.xLabelTextColor}];
+            [obj drawWithRect:rect options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font, NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName:_data.xLabelTextColor} context:nil];
+
         }];
     }
     // 绘 Y 轴数据
@@ -132,7 +133,7 @@
 
             NSMutableParagraphStyle *style = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
             style.alignment = NSTextAlignmentRight;
-            [obj drawInRect:rect withAttributes:@{NSFontAttributeName:font, NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName: _data.yLabelTextColor}];
+            [obj drawWithRect:rect options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:font, NSParagraphStyleAttributeName:style, NSForegroundColorAttributeName: _data.yLabelTextColor} context:nil];
         }];
     }
     // 绘 x/y 坐标轴
